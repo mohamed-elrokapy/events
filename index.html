@@ -3,12 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Event Landing Page</title>
+    <title>Event Registration</title>
+    <meta
+      name="description"
+      content="Register for an exclusive event. Landing page with a short registration form."
+    />
     <link rel="stylesheet" href="style.css" />
 
+    <!-- Brevo tracker (web push / automation). Loaded async, the page works without it. -->
     <script src="https://cdn.brevo.com/js/sdk-loader.js" async></script>
     <script>
-      // Versgition: 2.0
+      // Version: 2.0
       window.Brevo = window.Brevo || [];
       Brevo.push([
         "init",
@@ -19,18 +24,79 @@
     </script>
   </head>
   <body>
-    <section class="hero">
-      <div class="container">
-        <h1>Join Our Exclusive Event</h1>
-        <p>Register now and secure your spot in this special opportunity!</p>
-        <form id="register-form">
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <input type="text" placeholder="Your Job Title" required />
-          <button type="submit">Register Now</button>
+    <main class="page">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Event registration</p>
+        <h1 id="page-title">Join Our Exclusive Event</h1>
+        <p class="lede">
+          Register now and secure your spot in this special opportunity!
+        </p>
+      </section>
+
+      <section class="ticket" aria-labelledby="form-title">
+        <header class="ticket__top">
+          <h2 id="form-title">Reserve your spot</h2>
+          <p class="ticket__stub" aria-hidden="true">Admit one</p>
+        </header>
+
+        <form id="register-form" class="form" novalidate>
+          <div class="field">
+            <label for="name">Your name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+              aria-describedby="name-error"
+            />
+            <p class="field__error" id="name-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="email">Your email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              autocapitalize="off"
+              spellcheck="false"
+              required
+              aria-describedby="email-error"
+            />
+            <p class="field__error" id="email-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="job">Your job title</label>
+            <input
+              type="text"
+              id="job"
+              name="job"
+              autocomplete="organization-title"
+              required
+              aria-describedby="job-error"
+            />
+            <p class="field__error" id="job-error" aria-live="polite"></p>
+          </div>
+
+          <button type="submit" class="btn">Register now</button>
+          <p class="demo-note">
+            Demo form: your details are not sent or stored anywhere.
+          </p>
         </form>
-      </div>
-    </section>
+
+        <div id="success" class="success" role="status" tabindex="-1" hidden>
+          <h3 id="success-title">Thank you</h3>
+          <p>
+            The form was filled in correctly. This is a demo, so your details
+            were not sent or stored anywhere and no spot was reserved.
+          </p>
+          <button type="button" id="again" class="btn btn--ghost">Fill in the form again</button>
+        </div>
+      </section>
+    </main>
 
     <script src="main.js"></script>
   </body>
